@@ -32,7 +32,7 @@ function link_field_widget_form(form, form_state, field, instance, langcode, ite
       case 'required':
         items[delta].children.push({
             type: 'textfield',
-            title: 'Title',
+            title: t('Title'),
             attributes: {
               id: items[delta].id + '-title'
             }
@@ -50,7 +50,7 @@ function link_field_widget_form(form, form_state, field, instance, langcode, ite
     // Display the URL element
     items[delta].children.push({
         type: 'textfield',
-        title: 'URL',
+        title: t('URL'),
         required: items[delta].required,
         attributes: {
           id: items[delta].id + '-url'
