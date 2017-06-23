@@ -1,4 +1,24 @@
 /**
+ * Implements hook_field_formatter_view().
+ */
+function link_field_formatter_view(entity_type, entity, field, instance, langcode, items, display) {
+  try {
+    var element = {};
+    $.each(items, function(delta, item) {
+        var title = item.title ? item.title : item.url
+        element[delta] = {
+          markup: theme(
+            'button_link',
+            { text: title, path: item.url, options: { InAppBrowser: true } }
+          )
+        };
+    });
+    return element;
+  }
+  catch (error) { console.log('link_field_formatter_view - ' + error); }
+}
+
+/**
  * Implements hook_field_info_instance_add_to_form().
  */
 function link_field_info_instance_add_to_form(entity_type, bundle, form, entity, element) {
@@ -121,24 +141,3 @@ function link_assemble_form_state_into_field(entity_type, bundle,
   }
   catch (error) { console.log('link_assemble_form_state_into_field - ' + error); }
 }
-
-/**
- * Implements hook_field_formatter_view().
- */
-function link_field_formatter_view(entity_type, entity, field, instance, langcode, items, display) {
-  try {
-    var element = {};
-    $.each(items, function(delta, item) {
-        var title = item.title ? item.title : item.url
-        element[delta] = {
-          markup: theme(
-            'button_link',
-            { text: title, path: item.url, options: { InAppBrowser: true } }
-          )
-        };
-    });
-    return element;
-  }
-  catch (error) { console.log('link_field_formatter_view - ' + error); }
-}
-
